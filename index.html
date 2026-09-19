@@ -1,1 +1,771 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bela Burger — Hamburgueria Artesanal na Bela Vista, São Paulo</title>
+<meta name="description" content="Bela Burger: hamburgueria artesanal na Rua Conselheiro Carrão, 408 — Bela Vista, São Paulo. Burgers na chapa, delivery e pedidos pelo WhatsApp (11) 98265-1852.">
+<meta name="keywords" content="hamburgueria Bela Vista, Bela Burger, hamburgueria São Paulo, hambúrguer artesanal Bela Vista, hambúrguer Conselheiro Carrão, delivery hambúrguer São Paulo">
+<meta name="theme-color" content="#0d0d0f">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://toddyx696.github.io/bela-burger-site/">
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Bela Burger — Hamburgueria Artesanal na Bela Vista">
+<meta property="og:description" content="Burgers na chapa, ambiente descontraído e delivery na Bela Vista, São Paulo. Rua Conselheiro Carrão, 408.">
+<meta property="og:locale" content="pt_BR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Bela Burger",
+  "servesCuisine": ["Hamburgueria", "Artesanal"],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rua Conselheiro Carrão, 408",
+    "addressLocality": "São Paulo",
+    "addressRegion": "SP",
+    "addressCountry": "BR"
+  },
+  "telephone": "+5511982651852",
+  "url": "https://toddyx696.github.io/bela-burger-site/",
+  "priceRange": "$$",
+  "hasMenu": "#cardapio",
+  "acceptsReservations": "False"
+}
+</script>
+<style>
+  :root{
+    --bg:#0b0b0d;
+    --bg-2:#101013;
+    --surface:#16161b;
+    --surface-2:#1d1d24;
+    --red:#d92b1c;
+    --red-soft:#ff4b33;
+    --gold:#e8b13f;
+    --white:#f5f3ef;
+    --muted:#a9a5a0;
+    --line:rgba(255,255,255,.09);
+    --shadow:0 24px 60px -20px rgba(0,0,0,.85);
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(circle at 12% -10%,rgba(217,43,28,.16),transparent 45%),radial-gradient(circle at 92% 8%,rgba(232,177,63,.07),transparent 40%);
+  }
+  h1,h2,h3,.display{font-family:'Anton',Impact,sans-serif;font-weight:400;letter-spacing:.5px;line-height:1;text-transform:uppercase}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{width:min(1180px,92vw);margin-inline:auto}
+  .eyebrow{font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--red-soft);font-weight:700}
+  /* ===== NAV ===== */
+  header.nav{
+    position:fixed;inset:0 0 auto 0;z-index:80;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px min(5vw,30px);
+    backdrop-filter:blur(14px);
+    background:rgba(11,11,13,.72);
+    border-bottom:1px solid transparent;
+    transition:.35s ease;
+  }
+  header.nav.scrolled{border-bottom-color:var(--line);background:rgba(11,11,13,.94)}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand-mark{
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(140deg,var(--red),#7d1208);
+    display:grid;place-items:center;
+    font-family:'Anton',sans-serif;font-size:1.05rem;color:#fff;
+    box-shadow:0 0 0 1px rgba(255,255,255,.12),0 0 26px -6px rgba(217,43,28,.75);
+  }
+  .brand-name{font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.06em}
+  .brand-name span{color:var(--red-soft)}
+  nav.links{display:flex;align-items:center;gap:28px}
+  nav.links a{font-size:.83rem;font-weight:500;color:var(--muted);transition:.25s;position:relative}
+  nav.links a:hover{color:var(--white)}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--red);transition:.3s}
+  nav.links a:hover::after{width:100%}
+  .nav-cta{
+    padding:11px 20px;border-radius:999px;font-size:.8rem;font-weight:700;
+    background:var(--red);color:#fff;transition:.25s;white-space:nowrap;
+    box-shadow:0 0 24px -8px rgba(217,43,28,.9);
+  }
+  .nav-cta:hover{background:var(--red-soft);transform:translateY(-1px)}
+  .burger-btn{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .burger-btn span{display:block;width:24px;height:2px;background:var(--white);margin:5px 0;border-radius:2px;transition:.3s}
+  .burger-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger-btn.open span:nth-child(2){opacity:0}
+  .burger-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;min-height:100svh;display:flex;align-items:center;
+    padding:120px 0 70px;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(ellipse at 78% 42%,rgba(217,43,28,.30),transparent 52%),
+      radial-gradient(ellipse at 20% 80%,rgba(232,177,63,.10),transparent 50%),
+      linear-gradient(180deg,#0b0b0d 0%,#131014 55%,#0b0b0d 100%);
+  }
+  .hero-grain{
+    position:absolute;inset:0;z-index:1;opacity:.35;pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.055) 1px,transparent 1px);
+    background-size:4px 4px;
+  }
+  .hero-inner{position:relative;z-index:3;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(3rem,8.2vw,6.4rem);line-height:.92;margin:18px 0 0}
+  .hero h1 em{font-style:normal;color:var(--red-soft);text-shadow:0 0 40px rgba(217,43,28,.55)}
+  .hero-sub{color:var(--muted);font-size:clamp(1rem,1.7vw,1.18rem);max-width:46ch;margin-top:22px;font-weight:300}
+  .hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:17px 30px;border-radius:999px;font-weight:700;font-size:.9rem;
+    letter-spacing:.03em;transition:.28s;border:1px solid transparent;cursor:pointer;
+  }
+  .btn-red{background:var(--red);color:#fff;box-shadow:0 18px 40px -16px rgba(217,43,28,.95)}
+  .btn-red:hover{background:var(--red-soft);transform:translateY(-2px);box-shadow:0 22px 50px -16px rgba(255,75,51,.95)}
+  .btn-ghost{border-color:rgba(255,255,255,.24);color:var(--white);background:rgba(255,255,255,.03)}
+  .btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,.09);transform:translateY(-2px)}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:9px;margin-top:30px;
+    padding:9px 16px;border-radius:999px;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+    background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);
+  }
+  .hero-badge i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+  .hero-visual{position:relative}
+  .hero-plate{
+    position:relative;border-radius:28px;overflow:hidden;
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow:var(--shadow),0 0 90px -30px rgba(217,43,28,.6);
+    aspect-ratio:4/5;background:linear-gradient(160deg,#1d1d24,#0e0e11);
+  }
+  .hero-plate img{width:100%;height:100%;object-fit:cover}
+  .hero-plate::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(190deg,transparent 45%,rgba(11,11,13,.85));
+  }
+  .hero-tag{
+    position:absolute;bottom:20px;left:20px;right:20px;z-index:2;
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding:14px 18px;border-radius:16px;
+    background:rgba(11,11,13,.72);backdrop-filter:blur(10px);border:1px solid var(--line);
+  }
+  .hero-tag strong{font-size:.82rem;letter-spacing:.06em}
+  .hero-tag small{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.02em}
+  .hero-tag b{color:var(--gold);font-family:'Anton',sans-serif;font-size:1.5rem;line-height:1}
+  .float-card{
+    position:absolute;top:-26px;left:-26px;z-index:4;
+    background:var(--surface-2);border:1px solid var(--line);border-radius:18px;
+    padding:16px 20px;box-shadow:var(--shadow);
+    animation:floaty 5.5s ease-in-out infinite;
+  }
+  .float-card small{display:block;color:var(--muted);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+  .float-card strong{font-family:'Anton',sans-serif;font-size:1.7rem;color:var(--red-soft)}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  /* ===== STRIP ===== */
+  .strip{border-block:1px solid var(--line);background:var(--bg-2);padding:20px 0;overflow:hidden}
+  .strip-track{display:flex;gap:60px;width:max-content;animation:slide 28s linear infinite}
+  .strip-track span{font-family:'Anton',sans-serif;font-size:1rem;letter-spacing:.2em;color:rgba(255,255,255,.30);white-space:nowrap;display:flex;align-items:center;gap:60px}
+  .strip-track span::after{content:"◆";color:var(--red);font-size:.7rem}
+  @keyframes slide{to{transform:translateX(-50%)}}
+  /* ===== SECTIONS ===== */
+  section{padding:clamp(70px,9vw,120px) 0;position:relative}
+  .sec-head{max-width:640px;margin-bottom:52px}
+  .sec-head h2{font-size:clamp(2rem,5vw,3.4rem);margin-top:14px}
+  .sec-head p{color:var(--muted);margin-top:16px;font-weight:300}
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .about-copy p{color:var(--muted);margin-top:18px;font-weight:300}
+  .about-features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:34px}
+  .feat{
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;
+    padding:18px;transition:.3s;
+  }
+  .feat:hover{border-color:rgba(217,43,28,.55);transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(217,43,28,.9)}
+  .feat strong{display:block;font-size:.88rem;margin-bottom:5px}
+  .feat span{font-size:.78rem;color:var(--muted);font-weight:300}
+  .about-media{border-radius:24px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1/1;box-shadow:var(--shadow)}
+  .about-media img{width:100%;height:100%;object-fit:cover}
+  /* MENU */
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+  .card{
+    background:linear-gradient(165deg,var(--surface) 0%,var(--bg-2) 100%);
+    border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;display:flex;flex-direction:column;transition:.35s;
+  }
+  .card:hover{transform:translateY(-6px);border-color:rgba(217,43,28,.5);box-shadow:0 30px 60px -30px rgba(217,43,28,.85)}
+  .card-img{aspect-ratio:16/11;overflow:hidden;position:relative;background:#111}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .card:hover .card-img img{transform:scale(1.07)}
+  .card-body{padding:24px;display:flex;flex-direction:column;flex:1}
+  .card-body h3{font-size:1.3rem;letter-spacing:.04em}
+  .card-body p{color:var(--muted);font-size:.87rem;margin-top:11px;font-weight:300;flex:1}
+  .pill{
+    display:inline-block;margin-top:16px;align-self:flex-start;
+    font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:6px 12px;border-radius:999px;background:rgba(217,43,28,.14);color:var(--red-soft);
+    border:1px solid rgba(217,43,28,.32);
+  }
+  .pill.gold{background:rgba(232,177,63,.13);color:var(--gold);border-color:rgba(232,177,63,.32)}
+  .menu-note{
+    margin-top:30px;padding:22px 26px;border-radius:18px;
+    background:var(--surface);border:1px dashed rgba(255,255,255,.18);
+    color:var(--muted);font-size:.85rem;font-weight:300;
+  }
+  .menu-note b{color:var(--white);font-weight:600}
+  .center-cta{display:flex;justify-content:center;margin-top:44px}
+  /* SPECIAL */
+  .special{
+    background:linear-gradient(150deg,#141014,#0b0b0d 70%);
+    border:1px solid var(--line);border-radius:30px;overflow:hidden;
+    display:grid;grid-template-columns:1.02fr .98fr;
+  }
+  .special-copy{padding:clamp(32px,5vw,58px)}
+  .special-copy h2{font-size:clamp(1.8rem,4.2vw,3rem);margin-top:14px}
+  .special-copy p{color:var(--muted);margin-top:16px;font-weight:300}
+  .special-media{position:relative;min-height:320px;background:#111}
+  .special-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .special-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0b0b0d,transparent 55%)}
+  /* EXPERIENCE */
+  .exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+  .exp{
+    background:var(--surface);border:1px solid var(--line);border-radius:20px;
+    padding:28px 22px;text-align:center;transition:.3s;
+  }
+  .exp:hover{background:var(--surface-2);border-color:rgba(217,43,28,.45);transform:translateY(-5px)}
+  .exp .ico{font-size:1.9rem;margin-bottom:14px;display:block}
+  .exp strong{font-size:.86rem;letter-spacing:.05em}
+  .exp span{display:block;color:var(--muted);font-size:.76rem;margin-top:7px;font-weight:300}
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;gap:14px}
+  .g{position:relative;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#141418}
+  .g img{width:100%;height:100%;object-fit:cover;transition:.55s}
+  .g:hover img{transform:scale(1.08)}
+  .g::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 40%,rgba(11,11,13,.75))}
+  .g figcaption{
+    position:absolute;left:14px;bottom:12px;z-index:2;
+    font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--white);
+  }
+  .g.big{grid-column:span 2;grid-row:span 2}
+  .g.wide{grid-column:span 2}
+  .gallery-note{margin-top:22px;color:var(--muted);font-size:.76rem;font-weight:300;text-align:center}
+  /* REVIEWS */
+  .rev-grid{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:32px;align-items:stretch}
+  .rev-score{
+    background:linear-gradient(160deg,var(--surface-2),var(--bg-2));
+    border:1px solid var(--line);border-radius:24px;padding:38px;text-align:center;
+    display:flex;flex-direction:column;justify-content:center;gap:10px;
+  }
+  .rev-score b{font-family:'Anton',sans-serif;font-size:4.4rem;line-height:1;color:var(--gold)}
+  .stars{color:var(--gold);letter-spacing:.18em;font-size:1.05rem}
+  .rev-score span{color:var(--muted);font-size:.82rem}
+  .rev-score a{margin-top:12px;color:var(--red-soft);font-size:.8rem;font-weight:600;border-bottom:1px solid rgba(217,43,28,.4);align-self:center}
+  .rev-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:34px;
+    display:flex;flex-direction:column;justify-content:center;gap:14px;
+  }
+  .rev-card p{color:var(--muted);font-weight:300;font-size:.92rem}
+  .rev-card .src{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  /* LOCATION */
+  .loc-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:34px;align-items:stretch}
+  .loc-info{display:flex;flex-direction:column;gap:16px}
+  .info-box{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+  .info-box small{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red-soft);font-weight:700}
+  .info-box strong{display:block;margin-top:9px;font-size:.95rem;font-weight:600}
+  .info-box p{color:var(--muted);font-size:.85rem;margin-top:5px;font-weight:300}
+  .map{border-radius:24px;overflow:hidden;border:1px solid var(--line);min-height:380px;background:var(--surface)}
+  .map iframe{width:100%;height:100%;min-height:380px;border:0;display:block;filter:grayscale(.25) contrast(1.05)}
+  /* HOURS */
+  .hours-list{display:grid;gap:10px;max-width:660px}
+  .hour-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:17px 24px;border-radius:15px;background:var(--surface);border:1px solid var(--line);
+    transition:.25s;
+  }
+  .hour-row:hover{border-color:rgba(217,43,28,.4)}
+  .hour-row.today{border-color:rgba(217,43,28,.6);background:rgba(217,43,28,.07)}
+  .hour-row span{font-size:.88rem;font-weight:500}
+  .hour-row b{font-size:.85rem;color:var(--muted);font-weight:500}
+  .hour-row.closed b{color:var(--red-soft)}
+  /* IG */
+  .ig-band{
+    background:linear-gradient(140deg,rgba(217,43,28,.14),transparent 60%),var(--surface);
+    border:1px solid var(--line);border-radius:28px;
+    padding:clamp(32px,5vw,56px);text-align:center;
+  }
+  .ig-band h2{font-size:clamp(1.7rem,4vw,2.8rem);margin-top:12px}
+  .ig-band p{color:var(--muted);margin-top:14px;font-weight:300}
+  .ig-feed{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px;
+  }
+  .ig-slot{
+    aspect-ratio:1/1;border-radius:16px;border:1px solid var(--line);
+    background:repeating-linear-gradient(45deg,#15151a,#15151a 12px,#191920 12px,#191920 24px);
+    display:grid;place-items:center;color:rgba(255,255,255,.25);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    overflow:hidden;position:relative;
+  }
+  .ig-slot img{width:100%;height:100%;object-fit:cover}
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);background:var(--bg-2);padding:64px 0 30px;margin-top:40px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+  .foot-grid h4{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:700}
+  .foot-grid p,.foot-grid a{color:var(--muted);font-size:.86rem;font-weight:300}
+  .foot-links{display:flex;flex-direction:column;gap:11px}
+  .foot-links a:hover{color:var(--red-soft)}
+  .foot-bottom{
+    margin-top:48px;padding-top:24px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    color:var(--muted);font-size:.76rem;
+  }
+  /* WHATSAPP FLOAT */
+  .wa{
+    position:fixed;right:20px;bottom:22px;z-index:90;
+    display:flex;align-items:center;gap:11px;
+    padding:14px 22px;border-radius:999px;
+    background:#1faa59;color:#fff;font-weight:700;font-size:.85rem;
+    box-shadow:0 16px 38px -12px rgba(31,170,89,.9);
+    transition:.28s;animation:pulse 2.6s infinite;
+  }
+  .wa:hover{transform:translateY(-3px) scale(1.02);background:#25c265}
+  .wa svg{width:21px;height:21px;fill:#fff;flex:none}
+  @keyframes pulse{0%,100%{box-shadow:0 16px 38px -12px rgba(31,170,89,.9)}50%{box-shadow:0 16px 46px -8px rgba(31,170,89,1)}}
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  /* MOBILE NAV PANEL */
+  .mobile-panel{
+    position:fixed;inset:0;z-index:79;background:rgba(11,11,13,.98);
+    display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 34px;
+    opacity:0;pointer-events:none;transition:.35s;
+  }
+  .mobile-panel.open{opacity:1;pointer-events:auto}
+  .mobile-panel a{font-family:'Anton',sans-serif;font-size:1.75rem;padding:12px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+  .mobile-panel a:hover{color:var(--red-soft)}
+  @media(max-width:980px){
+    nav.links,.nav-cta{display:none}
+    .burger-btn{display:block}
+    .hero-inner,.about-grid,.rev-grid,.loc-grid{grid-template-columns:1fr;gap:40px}
+    .special{grid-template-columns:1fr}
+    .special-media{min-height:240px}
+    .float-card{left:auto;right:12px;top:-16px}
+    .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+    .g.big{grid-column:span 2;grid-row:span 1}
+    .ig-feed{grid-template-columns:repeat(2,1fr)}
+    .foot-grid{grid-template-columns:1fr;gap:34px}
+    .about-features{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .hero{padding-top:104px}
+    .btn{width:100%;justify-content:center}
+    .hero-btns{flex-direction:column}
+    .wa{padding:13px 18px;font-size:.8rem;right:14px;bottom:14px}
+    .wa span{display:none}
+    .wa{padding:15px;border-radius:50%}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a href="#top" class="brand">
+    <div class="brand-mark">BB</div>
+    <div class="brand-name">BELA<span>BURGER</span></div>
+  </a>
+  <nav class="links">
+    <a href="#sobre">Sobre</a>
+    <a href="#cardapio">Cardápio</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#local">Localização</a>
+    <a href="#horarios">Horários</a>
+  </nav>
+  <a class="nav-cta" target="_blank" rel="noopener" href="https://wa.me/5511982651852?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Bela%20Burger%20e%20gostaria%20de%20fazer%20um%20pedido.">Pedir no WhatsApp</a>
+  <button class="burger-btn" id="burgerBtn" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+</header>
+
+<div class="mobile-panel" id="mobilePanel">
+  <a href="#sobre">Sobre</a>
+  <a href="#cardapio">Cardápio</a>
+  <a href="#galeria">Galeria</a>
+  <a href="#local">Localização</a>
+  <a href="#horarios">Horários</a>
+  <a href="https://wa.me/5511982651852?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Bela%20Burger%20e%20gostaria%20de%20fazer%20um%20pedido." target="_blank" rel="noopener" style="color:var(--red-soft)">Pedir no WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <p class="eyebrow">Hamburgueria Artesanal · Bela Vista</p>
+      <h1>Bela<em>Burger</em></h1>
+      <p class="hero-sub">Burgers feitos na chapa, pão brioche, ingredientes de verdade e aquele ambiente de bairro que faz você querer ficar mais um pouco.</p>
+      <div class="hero-btns">
+        <a href="#cardapio" class="btn btn-red">Ver cardápio</a>
+        <a target="_blank" rel="noopener" href="https://wa.me/5511982651852?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Bela%20Burger%20e%20gostaria%20de%20fazer%20um%20pedido." class="btn btn-ghost">Pedir pelo WhatsApp</a>
+      </div>
+      <div class="hero-badge"><i></i> Rua Conselheiro Carrão, 408 — Bela Vista, São Paulo</div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-card">
+        <small>Aberto pra delivery</small>
+        <strong>Na chapa</strong>
+      </div>
+      <div class="hero-plate">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80" alt="Hambúrguer artesanal com queijo derretido servido no Bela Burger" loading="eager">
+        <div class="hero-tag">
+          <div>
+            <strong>Bela Burger</strong>
+            <small>Bela Vista · São Paulo</small>
+          </div>
+          <b>🍔</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-track">
+    <span>Burgers na chapa<span>Pão brioche<span>Delivery<span>Bela Vista<span>Trinca de queijo<span>Feito na casa<span>Burgers na chapa<span>Pão brioche<span>Delivery<span>Bela Vista<span>Trinca de queijo<span>Feito na casa</span></span></span></span></span></span></span></span></span></span></span></span>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="wrap about-grid">
+    <div class="about-copy reveal">
+      <p class="eyebrow">Somos Bela Burger</p>
+      <h2>Artesanal de verdade, na Bela Vista</h2>
+      <p>Nascemos de uma ideia simples: fazer hambúrguer bem feito, com carne preparada na hora, pão de qualidade e aquele cuidado que se sente na primeira mordida. Nada de atalho.</p>
+      <p>Estamos na Rua Conselheiro Carrão, 408, no coração da Bela Vista — pertinho do centro, fácil de chegar e com aquele clima de bairro que só São Paulo tem. Serve pra sentar com calma ou pra pedir em casa.</p>
+      <div class="about-features">
+        <div class="feat"><strong>Carne na chapa</strong><span>Preparada no momento do pedido, com selo e suculência.</span></div>
+        <div class="feat"><strong>Pão brioche</strong><span>Levemente tostado na manteiga pro ponto certo.</span></div>
+        <div class="feat"><strong>Molhos da casa</strong><span>Receitas próprias que assinam cada burger.</span></div>
+        <div class="feat"><strong>Delivery</strong><span>Chega quente e montado do jeito que saiu da chapa.</span></div>
+      </div>
+    </div>
+    <div class="about-media reveal">
+      <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=80" alt="Hambúrguer artesanal com bacon e queijo cheddar" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- CARDAPIO -->
+<section id="cardapio" style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Destaques do cardápio</p>
+      <h2>Os burgers da casa</h2>
+      <p>Uma seleção do que sai da nossa cozinha. O cardápio completo muda com o tempo — confira sempre pelo WhatsApp ou no delivery.</p>
+    </div>
+    <div class="menu-grid">
+      <article class="card reveal">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Hambúrguer com queijo derretido" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Signature Burger</h3>
+          <p>Pão brioche, blend de carne prensado na chapa, queijo derretido, molho especial da casa e picles artesanal.</p>
+          <span class="pill">Mais pedido</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80" alt="Hambúrguer duplo com cheddar" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Duplo Cheddar</h3>
+          <p>Dois burgers na chapa, camadas generosas de cheddar inglês, cebola caramelizada e maionese da casa.</p>
+          <span class="pill">Duplo</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80" alt="Hambúrguer com bacon crocante" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Bacon Burger</h3>
+          <p>Carne na chapa, cheddar, duas camadas de bacon crocante, picles artesanal e maionese especial.</p>
+          <span class="pill">Bacon</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=800&q=80" alt="Cheeseburger clássico com alface e tomate" loading="lazy"></div>
+        <div class="card-body">
+          <h3>X-Salada</h3>
+          <p>Pão brioche, carne na chapa, cheddar, alface americana, tomate e molho verde da casa.</p>
+          <span class="pill">Clássico</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?auto=format&fit=crop&w=800&q=80" alt="Hambúrguer smash com queijo" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Bela Smash</h3>
+          <p>Dois discos de carne prensados bem finos, queijo na hora de virar, cebola e molho especial. Achata e devora.</p>
+          <span class="pill gold">Smash</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-img"><img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=800&q=80" alt="Hambúrguer com fritas crocantes" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Bela Combo</h3>
+          <p>Burger da casa + porção de fritas crocantes + bebida. A escolha certa pra matar a fome de verdade.</p>
+          <span class="pill gold">Combo</span>
+        </div>
+      </article>
+    </div>
+    <div class="menu-note reveal">
+      <b>Sobre o cardápio:</b> descrições de referência. Os ingredientes, as opções disponíveis e os preços podem mudar sem aviso — confirme no WhatsApp ou na plataforma de delivery antes de pedir.
+    </div>
+    <div class="center-cta reveal">
+      <a target="_blank" rel="noopener" href="https://wa.me/5511982651852?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Bela%20Burger%20e%20gostaria%20de%20ver%20o%20card%C3%A1pio%20completo." class="btn btn-red">Ver cardápio completo</a>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIAL -->
+<section>
+  <div class="wrap">
+    <div class="special reveal">
+      <div class="special-copy">
+        <p class="eyebrow">Burger especial</p>
+        <h2>Espaço reservado para o especial da casa</h2>
+        <p>De tempos em tempos a gente solta uma criação fora do comum: combinações de queijos, molhos longos e ingredientes especiais, em quantidade limitada.</p>
+        <p>Esta área fica pronta para receber o próximo lançamento. Enquanto isso, chama no WhatsApp e pergunta qual é o especial do dia.</p>
+        <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+          <a target="_blank" rel="noopener" href="https://wa.me/5511982651852?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Bela%20Burger.%20Qual%20%C3%A9%20o%20especial%20de%20hoje%3F" class="btn btn-red">Perguntar o especial</a>
+        </div>
+      </div>
+      <div class="special-media">
+        <img src="https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=1000&q=80" alt="Hambúrguer especial com ingredientes selecionados" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Experiência</p>
+      <h2>Mais do que um burger</h2>
+      <p>É o lugar, o cheiro da chapa, o som da casa cheia. Vem viver o Bela Burger do começo ao fim.</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp reveal"><span class="ico">🍔</span><strong>Burgers</strong><span>Feitos na chapa, no ponto certo.</span></div>
+      <div class="exp reveal"><span class="ico">🍟</span><strong>Porções</strong><span>Fritas crocantes e petiscos pra dividir.</span></div>
+      <div class="exp reveal"><span class="ico">🥤</span><strong>Drinks & Bebidas</strong><span>Pra acompanhar a mordida.</span></div>
+      <div class="exp reveal"><span class="ico">📍</span><strong>Bela Vista</strong><span>No coração de São Paulo, fácil de chegar.</span></div>
+      <div class="exp reveal"><span class="ico">🏙️</span><strong>Clima de bairro</strong><span>Descontraído, pra sentar sem pressa.</span></div>
+      <div class="exp reveal"><span class="ico">🛵</span><strong>Delivery</strong><span>Chega quente na sua casa.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Galeria</p>
+      <h2>Dá uma olhada</h2>
+      <p>Fotos de burgers, porções e do clima da casa.</p>
+    </div>
+    <div class="gallery reveal">
+      <figure class="g big"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80" alt="Hambúrguer artesanal com queijo" loading="lazy"><figcaption>Burgers</figcaption></figure>
+      <figure class="g"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=80" alt="Porção de fritas crocantes" loading="lazy"><figcaption>Porções</figcaption></figure>
+      <figure class="g"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=700&q=80" alt="Bebida servida no copo" loading="lazy"><figcaption>Bebidas</figcaption></figure>
+      <figure class="g wide"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Ambiente interno de restaurante com mesas" loading="lazy"><figcaption>Ambiente</figcaption></figure>
+      <figure class="g"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=700&q=80" alt="Mesa de bar com iluminação quente" loading="lazy"><figcaption>Clima</figcaption></figure>
+      <figure class="g"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=700&q=80" alt="Hambúrguer com bacon" loading="lazy"><figcaption>Bacon</figcaption></figure>
+    </div>
+    <p class="gallery-note">Imagens ilustrativas de gastronomia e ambiente.</p>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Avaliações</p>
+      <h2>O que dizem por aí</h2>
+    </div>
+    <div class="rev-grid reveal">
+      <div class="rev-score">
+        <b>4,5</b>
+        <div class="stars">★★★★★</div>
+        <span>Nota pública média no Google</span>
+        <span>350+ avaliações</span>
+        <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Bela+Burger+Conselheiro+Carr%C3%A3o+408+S%C3%A3o+Paulo">Ver no Google Maps</a>
+      </div>
+      <div class="rev-card">
+        <span class="src">Sobre as avaliações</span>
+        <p>A nota e o volume de avaliações acima refletem a reputação pública do Bela Burger no Google no momento da criação deste site e podem variar.</p>
+        <p>Não usamos depoimentos inventados. Para ler os comentários na íntegra, é só abrir a ficha do restaurante no Google Maps.</p>
+        <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Bela+Burger+Conselheiro+Carr%C3%A3o+408+S%C3%A3o+Paulo" class="btn btn-ghost" style="align-self:flex-start;margin-top:6px">Ler avaliações no Google</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCAL -->
+<section id="local">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Localização</p>
+      <h2>Vem pro Bela</h2>
+      <p>Estamos na Bela Vista, pertinho do centro de São Paulo.</p>
+    </div>
+    <div class="loc-grid reveal">
+      <div class="loc-info">
+        <div class="info-box">
+          <small>Endereço</small>
+          <strong>Rua Conselheiro Carrão, 408</strong>
+          <p>Bela Vista — São Paulo/SP</p>
+        </div>
+        <div class="info-box">
+          <small>WhatsApp</small>
+          <strong>(11) 98265-1852</strong>
+          <p>Pedidos, cardápio e dúvidas.</p>
+        </div>
+        <div class="info-box">
+          <small>Delivery</small>
+          <strong>Peça em casa</strong>
+          <p>Chame no WhatsApp e confirme a área de entrega.</p>
+        </div>
+        <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Conselheiro+Carr%C3%A3o+408+Bela+Vista+S%C3%A3o+Paulo" class="btn btn-red" style="justify-content:center">Como chegar</a>
+        <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Bela+Burger+Conselheiro+Carr%C3%A3o+408+S%C3%A3o+Paulo" class="btn btn-ghost" style="justify-content:center">Abrir no Google Maps</a>
+      </div>
+      <div class="map">
+        <iframe title="Mapa - Bela Burger, Rua Conselheiro Carrão 408" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Rua%20Conselheiro%20Carr%C3%A3o%2C%20408%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP&output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios" style="background:var(--bg-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Horários</p>
+      <h2>Quando a chapa acende</h2>
+      <p>Confirme sempre pelo WhatsApp antes de sair de casa — os horários podem mudar em datas especiais.</p>
+    </div>
+    <div class="hours-list reveal" id="hoursList">
+      <div class="hour-row" data-day="1"><span>Segunda-feira</span><b>Fechado</b></div>
+      <div class="hour-row" data-day="2"><span>Terça-feira</span><b>A confirmar</b></div>
+      <div class="hour-row" data-day="3"><span>Quarta-feira</span><b>A confirmar</b></div>
+      <div class="hour-row" data-day="4"><span>Quinta-feira</span><b>A confirmar</b></div>
+      <div class="hour-row" data-day="5"><span>Sexta-feira</span><b>A confirmar</b></div>
+      <div class="hour-row" data-day="6"><span>Sábado</span><b>A confirmar</b></div>
+      <div class="hour-row" data-day="0"><span>Domingo</span><b>A confirmar</b></div>
+    </div>
+    <p class="gallery-note" style="text-align:left;margin-top:20px">Os horários ainda não foram confirmados oficialmente — por isso deixamos os campos prontos para edição. Atualize quando tiver a informação fechada.</p>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="instagram">
+  <div class="wrap">
+    <div class="ig-band reveal">
+      <p class="eyebrow">Instagram</p>
+      <h2>Siga o Bela</h2>
+      <p>Acompanhe os lançamentos, os especiais e o dia a dia da chapa.</p>
+      <div class="ig-feed" id="igFeed">
+        <div class="ig-slot">Post</div>
+        <div class="ig-slot">Post</div>
+        <div class="ig-slot">Post</div>
+        <div class="ig-slot">Post</div>
+      </div>
+      <p class="gallery-note" style="margin-top:18px">Área preparada para receber o feed do Instagram. Enquanto a integração não estiver ativa, os espaços ficam neutros.</p>
+      <div style="margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a target="_blank" rel="noopener" href="https://www.instagram.com/" class="btn btn-red">Seguir no Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand" style="margin-bottom:16px">
+          <div class="brand-mark">BB</div>
+          <div class="brand-name">BELA<span>BURGER</span></div>
+        </div>
+        <p>Hamburgueria artesanal na Bela Vista, São Paulo.</p>
+        <p style="margin-top:10px">Rua Conselheiro Carrão, 408 — Bela Vista, São Paulo — SP</p>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <div class="foot-links">
+          <a target="_blank" rel="noopener" href="https://wa.me/5511982651852?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Bela%20Burger%20e%20gostaria%20de%20fazer%20um%20pedido.">WhatsApp — (11) 98265-1852</a>
+          <a target="_blank" rel="noopener" href="https://www.instagram.com/">Instagram</a>
+          <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Bela+Burger+Conselheiro+Carr%C3%A3o+408+S%C3%A3o+Paulo">Google Maps</a>
+        </div>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <div class="foot-links">
+          <a href="#sobre">Sobre</a>
+          <a href="#cardapio">Cardápio</a>
+          <a href="#galeria">Galeria</a>
+          <a href="#local">Localização</a>
+          <a href="#horarios">Horários</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Bela Burger. Todos os direitos reservados.</span>
+      <span>Feito para quem gosta de burger bem feito.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" target="_blank" rel="noopener" aria-label="Pedir pelo WhatsApp"
+   href="https://wa.me/5511982651852?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Bela%20Burger%20e%20gostaria%20de%20fazer%20um%20pedido.">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1s-.5-.2-.7.1-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.7l.5-.6.4-.6v-.6l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4a3.3 3.3 0 0 0-1 2.4 5.8 5.8 0 0 0 1.2 3.1 13.2 13.2 0 0 0 5.1 4.5c2.3.9 2.6.7 3.1.7a2.9 2.9 0 0 0 1.9-1.3 2.4 2.4 0 0 0 .2-1.3l-.4-.4zM12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+  <span>Pedir no WhatsApp</span>
+</a>
+
+<script>
+  // nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+  // mobile menu
+  const btn = document.getElementById('burgerBtn');
+  const panel = document.getElementById('mobilePanel');
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    panel.classList.toggle('open');
+    document.body.style.overflow = panel.classList.contains('open') ? 'hidden' : '';
+  });
+  panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    btn.classList.remove('open'); panel.classList.remove('open'); document.body.style.overflow = '';
+  }));
+
+  // reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // destaca o dia de hoje (segunda = fechado)
+  const today = new Date().getDay();
+  document.querySelectorAll('.hour-row').forEach(row => {
+    if (Number(row.dataset.day) === today) row.classList.add('today');
+  });
+  document.querySelector('.hour-row[data-day="1"]').classList.add('closed');
+</script>
+</body>
+</html>
