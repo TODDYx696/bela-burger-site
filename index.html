@@ -338,9 +338,54 @@
   .wa:hover{transform:translateY(-3px) scale(1.02);background:#25c265}
   .wa svg{width:21px;height:21px;fill:#fff;flex:none}
   @keyframes pulse{0%,100%{box-shadow:0 16px 38px -12px rgba(31,170,89,.9)}50%{box-shadow:0 16px 46px -8px rgba(31,170,89,1)}}
-  /* REVEAL */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+  /* REVEAL / SCROLL ANIMATIONS */
+  .reveal{
+    opacity:0;transform:translateY(38px);
+    transition:opacity .85s cubic-bezier(.22,.8,.3,1),transform .85s cubic-bezier(.22,.8,.3,1),filter .85s ease;
+    transition-delay:var(--d,0ms);
+    will-change:opacity,transform;
+  }
   .reveal.in{opacity:1;transform:none}
+  .reveal[data-anim="left"]{transform:translateX(-56px)}
+  .reveal[data-anim="left"].in{transform:none;opacity:1}
+  .reveal[data-anim="right"]{transform:translateX(56px)}
+  .reveal[data-anim="right"].in{transform:none;opacity:1}
+  .reveal[data-anim="zoom"]{transform:scale(.88);opacity:0}
+  .reveal[data-anim="zoom"].in{transform:none;opacity:1}
+  .reveal[data-anim="blur"]{filter:blur(16px);transform:translateY(26px)}
+  .reveal[data-anim="blur"].in{filter:blur(0);transform:none;opacity:1}
+  /* HERO ENTRANCE */
+  .hero .eyebrow,.hero h1,.hero-sub,.hero-btns,.hero-badge{opacity:0;transform:translateY(32px);animation:heroUp 1s cubic-bezier(.22,.8,.3,1) forwards}
+  .hero .eyebrow{animation-delay:.12s}
+  .hero h1{animation-delay:.24s}
+  .hero-sub{animation-delay:.4s}
+  .hero-btns{animation-delay:.54s}
+  .hero-badge{animation-delay:.68s}
+  .hero-visual{opacity:0;transform:translateY(46px) scale(.95);animation:heroIn 1.25s cubic-bezier(.22,.8,.3,1) .34s forwards}
+  .hero-plate img{animation:slowZoom 18s ease-in-out infinite alternate}
+  @keyframes heroUp{to{opacity:1;transform:none}}
+  @keyframes heroIn{to{opacity:1;transform:none}}
+  @keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.08)}}
+  /* READ PROGRESS BAR */
+  .progress{
+    position:fixed;top:0;left:0;height:3px;width:0;z-index:95;
+    background:linear-gradient(90deg,var(--red),var(--red-soft),var(--gold));
+    box-shadow:0 0 16px rgba(217,43,28,.85);
+  }
+  /* SECTION TITLE SWEEP */
+  .sec-head h2{position:relative;display:inline-block}
+  .sec-head h2::after{
+    content:"";position:absolute;left:0;bottom:-8px;height:3px;width:0;
+    background:linear-gradient(90deg,var(--red),transparent);
+    transition:width 1.05s cubic-bezier(.22,.8,.3,1) .22s;
+  }
+  .sec-head.in h2::after{width:66%}
+  @media (prefers-reduced-motion: reduce){
+    .reveal,.hero .eyebrow,.hero h1,.hero-sub,.hero-btns,.hero-badge,.hero-visual{
+      animation:none !important;opacity:1 !important;transform:none !important;filter:none !important;
+    }
+    .strip-track,.hero-plate img{animation:none !important}
+  }
   /* MOBILE NAV PANEL */
   .mobile-panel{
     position:fixed;inset:0;z-index:79;background:rgba(11,11,13,.98);
@@ -532,7 +577,7 @@
 <section>
   <div class="wrap">
     <div class="special reveal">
-      <div class="special-copy">
+      <div class="special-copy" data-anim="left">
         <p class="eyebrow">Burger especial</p>
         <h2>Espaço reservado para o especial da casa</h2>
         <p>De tempos em tempos a gente solta uma criação fora do comum: combinações de queijos, molhos longos e ingredientes especiais, em quantidade limitada.</p>
@@ -541,7 +586,7 @@
           <a target="_blank" rel="noopener" href="https://wa.me/5511982651852?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Bela%20Burger.%20Qual%20%C3%A9%20o%20especial%20de%20hoje%3F" class="btn btn-red">Perguntar o especial</a>
         </div>
       </div>
-      <div class="special-media">
+      <div class="special-media" data-anim="right">
         <img src="https://images.unsplash.com/photo-1550317138-10000687a72b?auto=format&fit=crop&w=1000&q=80" alt="Hambúrguer especial com ingredientes selecionados" loading="lazy">
       </div>
     </div>
@@ -557,12 +602,12 @@
       <p>É o lugar, o cheiro da chapa, o som da casa cheia. Vem viver o Bela Burger do começo ao fim.</p>
     </div>
     <div class="exp-grid">
-      <div class="exp reveal"><span class="ico">🍔</span><strong>Burgers</strong><span>Feitos na chapa, no ponto certo.</span></div>
-      <div class="exp reveal"><span class="ico">🍟</span><strong>Porções</strong><span>Fritas crocantes e petiscos pra dividir.</span></div>
-      <div class="exp reveal"><span class="ico">🥤</span><strong>Drinks & Bebidas</strong><span>Pra acompanhar a mordida.</span></div>
-      <div class="exp reveal"><span class="ico">📍</span><strong>Bela Vista</strong><span>No coração de São Paulo, fácil de chegar.</span></div>
-      <div class="exp reveal"><span class="ico">🏙️</span><strong>Clima de bairro</strong><span>Descontraído, pra sentar sem pressa.</span></div>
-      <div class="exp reveal"><span class="ico">🛵</span><strong>Delivery</strong><span>Chega quente na sua casa.</span></div>
+      <div class="exp"><span class="ico">🍔</span><strong>Burgers</strong><span>Feitos na chapa, no ponto certo.</span></div>
+      <div class="exp"><span class="ico">🍟</span><strong>Porções</strong><span>Fritas crocantes e petiscos pra dividir.</span></div>
+      <div class="exp"><span class="ico">🥤</span><strong>Drinks & Bebidas</strong><span>Pra acompanhar a mordida.</span></div>
+      <div class="exp"><span class="ico">📍</span><strong>Bela Vista</strong><span>No coração de São Paulo, fácil de chegar.</span></div>
+      <div class="exp"><span class="ico">🏙️</span><strong>Clima de bairro</strong><span>Descontraído, pra sentar sem pressa.</span></div>
+      <div class="exp"><span class="ico">🛵</span><strong>Delivery</strong><span>Chega quente na sua casa.</span></div>
     </div>
   </div>
 </section>
@@ -575,7 +620,7 @@
       <h2>Dá uma olhada</h2>
       <p>Fotos de burgers, porções e do clima da casa.</p>
     </div>
-    <div class="gallery reveal">
+    <div class="gallery">
       <figure class="g big"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80" alt="Hambúrguer artesanal com queijo" loading="lazy"><figcaption>Burgers</figcaption></figure>
       <figure class="g"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=80" alt="Porção de fritas crocantes" loading="lazy"><figcaption>Porções</figcaption></figure>
       <figure class="g"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=700&q=80" alt="Bebida servida no copo" loading="lazy"><figcaption>Bebidas</figcaption></figure>
@@ -594,15 +639,15 @@
       <p class="eyebrow">Avaliações</p>
       <h2>O que dizem por aí</h2>
     </div>
-    <div class="rev-grid reveal">
-      <div class="rev-score">
+    <div class="rev-grid">
+      <div class="rev-score reveal" data-anim="zoom">
         <b>4,5</b>
         <div class="stars">★★★★★</div>
         <span>Nota pública média no Google</span>
         <span>350+ avaliações</span>
         <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Bela+Burger+Conselheiro+Carr%C3%A3o+408+S%C3%A3o+Paulo">Ver no Google Maps</a>
       </div>
-      <div class="rev-card">
+      <div class="rev-card reveal" data-anim="blur">
         <span class="src">Sobre as avaliações</span>
         <p>A nota e o volume de avaliações acima refletem a reputação pública do Bela Burger no Google no momento da criação deste site e podem variar.</p>
         <p>Não usamos depoimentos inventados. Para ler os comentários na íntegra, é só abrir a ficha do restaurante no Google Maps.</p>
@@ -620,27 +665,15 @@
       <h2>Vem pro Bela</h2>
       <p>Estamos na Bela Vista, pertinho do centro de São Paulo.</p>
     </div>
-    <div class="loc-grid reveal">
+    <div class="loc-grid">
       <div class="loc-info">
-        <div class="info-box">
-          <small>Endereço</small>
-          <strong>Rua Conselheiro Carrão, 408</strong>
-          <p>Bela Vista — São Paulo/SP</p>
-        </div>
-        <div class="info-box">
-          <small>WhatsApp</small>
-          <strong>(11) 98265-1852</strong>
-          <p>Pedidos, cardápio e dúvidas.</p>
-        </div>
-        <div class="info-box">
-          <small>Delivery</small>
-          <strong>Peça em casa</strong>
-          <p>Chame no WhatsApp e confirme a área de entrega.</p>
-        </div>
-        <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Conselheiro+Carr%C3%A3o+408+Bela+Vista+S%C3%A3o+Paulo" class="btn btn-red" style="justify-content:center">Como chegar</a>
-        <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Bela+Burger+Conselheiro+Carr%C3%A3o+408+S%C3%A3o+Paulo" class="btn btn-ghost" style="justify-content:center">Abrir no Google Maps</a>
+        <div class="info-box reveal" data-anim="left"><small>Endereço</small><strong>Rua Conselheiro Carrão, 408</strong><p>Bela Vista — São Paulo/SP</p></div>
+        <div class="info-box reveal" data-anim="left"><small>WhatsApp</small><strong>(11) 98265-1852</strong><p>Pedidos, cardápio e dúvidas.</p></div>
+        <div class="info-box reveal" data-anim="left"><small>Delivery</small><strong>Peça em casa</strong><p>Chame no WhatsApp e confirme a área de entrega.</p></div>
+        <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Conselheiro+Carr%C3%A3o+408+Bela+Vista+S%C3%A3o+Paulo" class="btn btn-red reveal" data-anim="left" style="justify-content:center">Como chegar</a>
+        <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Bela+Burger+Conselheiro+Carr%C3%A3o+408+S%C3%A3o+Paulo" class="btn btn-ghost reveal" data-anim="left" style="justify-content:center">Abrir no Google Maps</a>
       </div>
-      <div class="map">
+      <div class="map reveal" data-anim="right">
         <iframe title="Mapa - Bela Burger, Rua Conselheiro Carrão 408" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=Rua%20Conselheiro%20Carr%C3%A3o%2C%20408%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP&output=embed"></iframe>
       </div>
@@ -735,11 +768,11 @@
 </a>
 
 <script>
-  // nav scroll
+  // NAV SCROLL
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
-  // mobile menu
+  // MOBILE MENU
   const btn = document.getElementById('burgerBtn');
   const panel = document.getElementById('mobilePanel');
   btn.addEventListener('click', () => {
@@ -751,16 +784,70 @@
     btn.classList.remove('open'); panel.classList.remove('open'); document.body.style.overflow = '';
   }));
 
-  // reveal on scroll
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // REVEAL ON SCROLL — com stagger e direções
   const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: .12 });
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -60px 0px' });
+
+  // stagger automático em grades
+  document.querySelectorAll('.menu-grid, .exp-grid, .gallery, .about-features, .ig-feed').forEach(grid => {
+    [...grid.children].forEach((child, i) => {
+      child.style.setProperty('--d', (i * 95) + 'ms');
+      if (!child.dataset.anim) {
+        if (grid.classList.contains('gallery')) child.dataset.anim = i % 2 ? 'right' : 'left';
+        else if (grid.classList.contains('menu-grid')) child.dataset.anim = 'zoom';
+        else child.dataset.anim = 'blur';
+      }
+      child.classList.add('reveal');
+    });
+  });
+
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // year
+  // BARRA DE PROGRESSO DE LEITURA
+  const bar = document.createElement('div');
+  bar.className = 'progress';
+  document.body.appendChild(bar);
+  const onScroll = () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // PARALLAX leve no hero
+  if (!reduced) {
+    const heroPlate = document.querySelector('.hero-plate');
+    const heroBg = document.querySelector('.hero-bg');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight * 1.2) {
+        if (heroPlate) heroPlate.style.transform = 'translateY(' + (y * .06) + 'px)';
+        if (heroBg) heroBg.style.transform = 'translateY(' + (y * .18) + 'px)';
+      }
+    }, { passive: true });
+  }
+
+  // POP nos números ao entrar na tela
+  const io2 = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('pop');
+        setTimeout(() => e.target.classList.remove('pop'), 430);
+        io2.unobserve(e.target);
+      }
+    });
+  }, { threshold: .6 });
+  document.querySelectorAll('.hero-tag b, .float-card strong, .rev-score b').forEach(el => io2.observe(el));
+
+  // YEAR
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // destaca o dia de hoje (segunda = fechado)
+  // DESTACA O DIA DE HOJE
   const today = new Date().getDay();
   document.querySelectorAll('.hour-row').forEach(row => {
     if (Number(row.dataset.day) === today) row.classList.add('today');
